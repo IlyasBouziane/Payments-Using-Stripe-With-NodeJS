@@ -1,0 +1,27 @@
+{
+  "name": "payments-with-stripe",
+  "version": "1.0.0",
+  "description": "In this project , I managed to setup payments with Stripe API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DarkIlyas/Payments-With-Stripe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DarkIlyas/Payments-With-Stripe/issues"
+  },
+  "homepage": "https://github.com/DarkIlyas/Payments-With-Stripe#readme",
+  
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "stripe": "^8.19.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
