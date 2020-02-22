@@ -47,15 +47,31 @@ function ready() {
         inputItemQte.addEventListener('change' , qteChanged)
     }
 
+    // Stripe config
+    var stripeHandler = StripeCheckout.configure({
+        key : stripePublicKey,
+        locale : 'auto',
+        token : function(token){
+            
+        }
+    })
+
+
     //Purchase
     var purchaseButton = document.getElementsByClassName('btn-purchase')[0]
     purchaseButton.addEventListener('click',function(event){
-        alert("Thanks for purchasing")
-       var cart = document.getElementsByClassName('cart-items')[0]
-       while(cart.hasChildNodes()){
-           cart.removeChild(cart.firstChild)
-       }
-       updateCartTotal()
+    //     alert("Thanks for purchasing")
+    //    var cart = document.getElementsByClassName('cart-items')[0]
+    //    while(cart.hasChildNodes()){
+    //        cart.removeChild(cart.firstChild)
+    //    }
+    //    updateCartTotal()
+        var priceElement = document.getElementsByClassName('cart-price')[0]
+        var price = parseFloat(priceElement.innerText.replace("EUR",'')) * 100
+        stripeHandler.open({
+            amount : price
+        })
+            
     })
     
     updateCartTotal()

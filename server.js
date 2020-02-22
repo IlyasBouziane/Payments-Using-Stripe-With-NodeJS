@@ -17,9 +17,12 @@ app.get('/store', function(req,resp){
         if(error){
             resp.status(500).end()
         } else {
-            resp.render('store.ejs',{
-                items : JSON.parse(data)
-            })
+            resp.render('store.ejs',
+            {
+                items : JSON.parse(data),
+                stripePublicKey : stripePublicKey
+            }
+            )
         }
     })
 
