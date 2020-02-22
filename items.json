@@ -1,0 +1,42 @@
+{
+    "music" : [
+        {
+            "id" : 1,
+            "title" : "Hybrid Theory",
+            "price" : 1199,
+            "image" : "album1.jpg"
+        },
+        {
+            "id" : 2,
+            "title" : "Meteora",
+            "price" : 998,
+            "image" : "album2.jpg"
+        },
+        {
+            "id" : 3,
+            "title" : "Minutes To Midnight",
+            "price" : 699,
+            "image" : "album3.jpg"
+        },
+        {
+            "id" : 4,
+            "title" : "Living Things",
+            "price" : 899,
+            "image" : "album4.jpg"
+        }
+    ],
+    "merch" : [
+        {
+            "id" : 5,
+            "title" : "T-Shirt",
+            "price" : 699,
+            "image" : "tshirt.jpg"
+        },
+        {
+            "id" : 6,
+            "title" : "Necklace",
+            "price" : 1420,
+            "image" : "collier.jpg"
+        }
+    ]
+}

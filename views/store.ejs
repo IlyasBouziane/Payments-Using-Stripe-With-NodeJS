@@ -28,46 +28,21 @@
         <section class="container" > 
             <h2 class="title-section">MUSIC</h2>
             <div class="shop-items">
-                <div class="shop-item">
-                    <span class="shop-item-title">Hybrid Theory</span>
+               <% items.music.forEach(item => { %>
+                <div class="shop-item" data-item-id = <%= item.id  %> >
+                    <span class="shop-item-title"><%= item.title %> </span>
                     <div>
-                        <img  class="shop-item-image" src="Images/album1.jpg" width="200">
+                        <img  class="shop-item-image" src="Images/<%= item.image %>" width="200">
                     </div>
                     <div class ="shop-item-details">
-                        <span class="shop-item-price">EUR 11.99</span>
+                        <span class="shop-item-price">EUR <%= item.price /100  %></span>
                         <button class ="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
                     </div>
                 </div>
-                <div class="shop-item">
-                    <span class="shop-item-title">Meteora</span>
-                    <div >
-                        <img  class="shop-item-image" src="Images/album2.jpg" width="200">
-                    </div>
-                    <div  class="shop-item-details">
-                        <span  class="shop-item-price">EUR 9.98</span>
-                        <button class ="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
-                    </div>
-                </div>
-                <div  class="shop-item">
-                    <span  class="shop-item-title">Minutes To Midnight</span>
-                    <div >
-                        <img  class="shop-item-image" src="Images/album3.jpg" width="200">
-                    </div>
-                    <div  class="shop-item-details">
-                        <span  class="shop-item-price">EUR 6.99</span>
-                        <button class ="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
-                    </div>
-                </div>
-                <div  class="shop-item">
-                    <span  class="shop-item-title">Living Things</span>
-                    <div >
-                        <img  class="shop-item-image" src="Images/album4.jpg" width="200">
-                    </div>
-                    <div  class="shop-item-details">
-                        <span  class="shop-item-price">EUR 6.99</span>
-                        <button class ="btn btn-primary shop-item-button" type="button"> ADD TO CART</button>
-                    </div>
-                </div>
+               <%})  %>  
+                
+                
+               
             </div>    
         </section>
 
