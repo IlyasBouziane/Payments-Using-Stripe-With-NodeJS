@@ -25,6 +25,21 @@ app.get('/store', function(req,resp){
             )
         }
     })
-
+})
+app.post('/purchase',function(req,resp){
+    fs.readFile('items.json',function(error,data){
+        if(error){
+            resp.status(500).end()
+        } else {
+           const items = JSON.parse(data)
+           const totalItems = items.music.concat(items.merch)
+           req.body.items.forEach(item => {
+               const chosenItem = totalItems.find(function(i){
+                   return chosenItem.id == i.id
+               })
+               total += total + chosenItem.price * item.qte *100  
+           })
+        }
+    })
 })
 app.listen(3000)

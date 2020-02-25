@@ -33,7 +33,8 @@ function ready() {
                 var title = shopItem.getElementsByClassName('shop-item-title')[0].innerText
                 var imageSrc = shopItem.getElementsByClassName('shop-item-image')[0].src
                 var price = shopItem.getElementsByClassName('shop-item-price')[0].innerText
-                addItemToCart(title,price,imageSrc)
+                var id = shopItem.dataset.itemId 
+                addItemToCart(title,price,imageSrc,id)
                 updateCartTotal()
             })
     }
@@ -47,12 +48,35 @@ function ready() {
         inputItemQte.addEventListener('change' , qteChanged)
     }
 
-    // Stripe config
+    // Stripe configuration
     var stripeHandler = StripeCheckout.configure({
         key : stripePublicKey,
         locale : 'auto',
         token : function(token){
-            
+            var items = []
+            var cart = document.getElementsByClassName('cart-items')[0]
+            var cartRows = cart.getElementsByClassName('cart-row')[0]
+            for(var i = 0 ; i < cartRows.length ; i++){
+                var cartRow = cartRows[i]
+                var qteElement = cartRow.getElementsByClassName('cart-item-quantity')[0]
+                var qte = qteElement.value
+                var id = cartRow.dataset.itemId
+                items.push({
+                    id : id,
+                    qte : qte
+                })
+            }
+            fetch('/purchase',{
+                method : 'POST',
+                headers : {
+                    'Content-Type' : 'application/json',
+                    'Accept' : 'application/json',
+                },
+                body : JSON.stringify({
+                    stripeTokenId : token.id,
+                    items : items
+                })
+            })
         }
     })
 
@@ -68,6 +92,7 @@ function ready() {
     //    updateCartTotal()
         var priceElement = document.getElementsByClassName('cart-price')[0]
         var price = parseFloat(priceElement.innerText.replace("EUR",'')) * 100
+        // open the pop up
         stripeHandler.open({
             amount : price
         })
@@ -96,7 +121,7 @@ function updateCartTotal(){
 
 }
 
-function addItemToCart(title,price,src) {
+function addItemToCart(title,price,src,id) {
     var cartItems = document.getElementsByClassName('cart-items')[0]
     var itemsTitle = cartItems.getElementsByClassName('cart-item-title')
     for(var i = 0 ; i < itemsTitle.length ; i++) {
@@ -108,7 +133,7 @@ function addItemToCart(title,price,src) {
 
     var cartRow = document.createElement('div')
     cartRowContent = `
-    <div class="cart-row">
+    <div class="cart-row" data-item-id = "${id}">
                     <div class="cart-column cart-item">
                         <img class="cart-item-image" src="${src}" width="100">
                         <span class="cart-item-title">${title}</span>
