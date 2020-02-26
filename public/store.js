@@ -105,7 +105,6 @@ function ready() {
         var price = parseFloat(priceElement.innerText.replace("EUR",'')) * 100
         // open the pop up
         if(price == 0 ){
-            console.log(price)
             alert('No item added to the cart')
         } else {
             stripeHandler.open({
