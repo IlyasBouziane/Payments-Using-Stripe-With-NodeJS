@@ -39,7 +39,7 @@ app.post('/purchase',function(req,resp){
                const chosenItem = totalItems.find(function(i){
                    return item.id == i.id
                })
-               total += total + chosenItem.price * item.qte *100  
+               total += total + chosenItem.price * item.qte  
            })
            stripe.charges.create({
                amount : total,
