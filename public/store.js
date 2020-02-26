@@ -55,7 +55,7 @@ function ready() {
         token : function(token){
             var items = []
             var cart = document.getElementsByClassName('cart-items')[0]
-            var cartRows = cart.getElementsByClassName('cart-row')[0]
+            var cartRows = cart.getElementsByClassName('cart-row')
             for(var i = 0 ; i < cartRows.length ; i++){
                 var cartRow = cartRows[i]
                 var qteElement = cartRow.getElementsByClassName('cart-item-quantity')[0]
@@ -76,6 +76,17 @@ function ready() {
                     stripeTokenId : token.id,
                     items : items
                 })
+            }).then(function(resp){
+                return resp.json()
+            }).then(function(data){
+                alert(data.message)
+                var cart = document.getElementsByClassName('cart-items')[0]
+                while(cart.hasChildNodes()){
+                    cart.removeChild(cart.firstChild)
+                }
+                updateCartTotal()
+            }).catch(function(error){
+                console.error(error)
             })
         }
     })
@@ -90,12 +101,17 @@ function ready() {
     //        cart.removeChild(cart.firstChild)
     //    }
     //    updateCartTotal()
-        var priceElement = document.getElementsByClassName('cart-price')[0]
+        var priceElement = document.getElementsByClassName('cart-total-price')[0]
         var price = parseFloat(priceElement.innerText.replace("EUR",'')) * 100
         // open the pop up
-        stripeHandler.open({
-            amount : price
-        })
+        if(price == 0 ){
+            console.log(price)
+            alert('No item added to the cart')
+        } else {
+            stripeHandler.open({
+                amount : price
+            })
+        }
             
     })
     
